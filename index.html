@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David Autoworks — Premium Car Detailing</title>
+  <meta name="description" content="David Autoworks — Premium car detailing in Calgary, AB. Interior & exterior detail, stain removal, polishing, and more for cars, trucks & SUVs. Licensed & insured. Call (825) 889-3306.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:      #000000;
+      --surface:    #0D0D0D;
+      --surface-2:  #111111;
+      --surface-3:  #181818;
+      --accent:     #EAFF00;
+      --white:      #FFFFFF;
+      --gray:       #555555;
+      --gray-light: #888888;
+      --border:     #1E1E1E;
+      --font-head:  'Barlow Condensed', sans-serif;
+      --font-body:  'Space Grotesk', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── UTILITIES ─────────────────────────────────────────── */
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    section { padding: 120px 0; }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 36px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--black);
+    }
+    .btn-primary:hover {
+      background: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(0,0,0,0.97);
+      padding: 16px 32px;
+      border-bottom-color: var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--gray-light);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      background: var(--accent);
+      padding: 10px 24px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #fff; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-head);
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding: 80px 32px 0;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 60%, rgba(234,255,0,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 30%, rgba(255,255,255,0.02) 0%, transparent 60%),
+        var(--black);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-headline {
+      font-family: var(--font-head);
+      font-size: clamp(72px, 10vw, 148px);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .hero-headline .accent-word {
+      color: var(--accent);
+      display: block;
+      animation: glow-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { text-shadow: 0 0 40px rgba(234,255,0,0.3); }
+      50%       { text-shadow: 0 0 80px rgba(234,255,0,0.6), 0 0 120px rgba(234,255,0,0.2); }
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--gray-light);
+      max-width: 440px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-scroll span {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scroll-anim 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-anim {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* ─── STATS BAR ──────────────────────────────────────────── */
+    #stats {
+      padding: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-item {
+      padding: 48px 40px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* ─── SERVICES ───────────────────────────────────────────── */
+    #services { background: var(--black); }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 64px;
+    }
+
+    .section-heading {
+      font-family: var(--font-head);
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .service-card {
+      background: var(--surface);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+      cursor: default;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.35s ease;
+    }
+
+    .service-card:hover { background: var(--surface-3); }
+    .service-card:hover::before { transform: scaleY(1); }
+
+    .service-number {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      opacity: 0.6;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .service-name {
+      font-family: var(--font-head);
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--gray-light);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-features li {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--gray-light);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .service-features li::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .service-link:hover { color: var(--accent); }
+    .service-link svg { transition: transform 0.2s; }
+    .service-link:hover svg { transform: translateX(4px); }
+
+    /* ─── WHY US ──────────────────────────────────────────────── */
+    #why {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .why-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .why-left {}
+
+    .why-tagline {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gray-light);
+      line-height: 1.8;
+      margin-top: 32px;
+      max-width: 360px;
+    }
+
+    .why-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .why-item {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .why-item:first-child { border-top: 1px solid var(--border); }
+
+    .why-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .why-icon svg { color: var(--accent); }
+
+    .why-item-title {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .why-item-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--gray-light);
+      line-height: 1.7;
+    }
+
+    /* ─── GALLERY ─────────────────────────────────────────────── */
+    #gallery { background: var(--black); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 320px 320px;
+      gap: 3px;
+    }
+
+    .gallery-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--surface-3);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-card:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-label {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .gallery-shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(234,255,0,0.04) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .gallery-card:hover .gallery-shine { transform: translateX(100%); }
+
+    /* ─── BEFORE/AFTER ────────────────────────────────────────── */
+    #results {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .ba-item {
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ba-caption {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .ba-visual {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      user-select: none;
+      cursor: ew-resize;
+    }
+
+    .ba-before, .ba-after {
+      position: absolute;
+      inset: 0;
+    }
+
+    .ba-before { z-index: 1; }
+
+    .ba-after {
+      z-index: 2;
+      clip-path: inset(0 50% 0 0);
+      transition: clip-path 0.01s;
+    }
+
+    .ba-gloss {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        transparent 0%,
+        rgba(255,255,255,0.03) 30%,
+        rgba(234,255,0,0.06) 50%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .ba-label {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      position: absolute;
+      bottom: 14px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .ba-before .ba-label {
+      left: 14px;
+      background: rgba(0,0,0,0.75);
+      color: var(--gray-light);
+    }
+
+    .ba-after .ba-label {
+      right: 14px;
+      background: var(--accent);
+      color: var(--black);
+    }
+
+    .ba-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: var(--accent);
+      z-index: 10;
+      cursor: ew-resize;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .ba-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: all;
+      cursor: ew-resize;
+    }
+
+    .ba-footer {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .ba-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gray-light);
+      line-height: 1.8;
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+
+    /* ─── CONTACT ──────────────────────────────────────────────── */
+    #contact { background: var(--black); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info {}
+
+    .contact-tagline {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gray-light);
+      line-height: 1.8;
+      margin-top: 24px;
+      margin-bottom: 48px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .contact-detail {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .contact-detail:first-child { border-top: 1px solid var(--border); }
+
+    .contact-detail-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .contact-detail-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .contact-detail-value {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--white);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--gray); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    .form-group select option { background: var(--surface); }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      margin-top: 8px;
+    }
+
+    .form-submit .btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 60px 0 40px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand {}
+
+    .footer-logo {
+      font-family: var(--font-head);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      display: block;
+      margin-bottom: 16px;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.6;
+      max-width: 220px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray);
+    }
+
+    .footer-copy span { color: var(--accent); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      section { padding: 80px 0; }
+
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .container { padding: 0 24px; }
+      #hero { padding: 80px 24px 0; }
+
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .stats-inner {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .stat-item { padding: 32px 20px; }
+      .stat-num { font-size: 48px; }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .why-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 260px);
+      }
+
+      .ba-grid { grid-template-columns: 1fr; }
+      .ba-visual { height: 280px; }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+      .footer-brand { grid-column: span 2; }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-headline { font-size: 56px; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 240px);
+      }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">David <span>Auto</span>works</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book Now</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" class="mob-link">Services</a>
+    <a href="#pricing" class="mob-link">Pricing</a>
+    <a href="#why" class="mob-link">Why Us</a>
+    <a href="#gallery" class="mob-link">Gallery</a>
+    <a href="#contact" class="mob-link">Contact</a>
+    <a href="#contact" class="btn btn-primary" style="margin-top:8px">Book Now</a>
+  </div>
+
+  <!-- ─── HERO ──────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Calgary's Car Detailing Specialists</span>
+      <h1 class="hero-headline">
+        We Make Cars<br>Look
+        <span class="accent-word">Better Than New.</span>
+      </h1>
+      <p class="hero-sub">
+        Premium interior and exterior detailing in Calgary for cars, trucks, and SUVs. Deep cleaning, stain removal, polishing, and more. Licensed and insured.
+      </p>
+      <div class="hero-actions">
+        <a href="tel:+18258893306" class="btn btn-primary">Call (825) 889-3306</a>
+        <a href="#services" class="btn btn-outline">Our Services</a>
+      </div>
+      <div style="margin-top:32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-light)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#EAFF00" stroke-width="1.5"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.2l-3.7 2.1.7-4.1-3-2.9 4.2-.7z"/></svg>
+          Licensed &amp; Insured
+        </span>
+        <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-light)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#EAFF00" stroke-width="1.5"><path d="M7 1C4.24 1 2 3.24 2 6c0 4 5 7 5 7s5-3 5-7c0-2.76-2.24-5-5-5z"/><circle cx="7" cy="6" r="1.5"/></svg>
+          Calgary, AB
+        </span>
+        <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-light)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#EAFF00" stroke-width="1.5"><path d="M2 7l3.5 3.5L12 3"/></svg>
+          Cars, Trucks &amp; SUVs
+        </span>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ─── STATS ──────────────────────────────────────────────────── -->
+  <div id="stats">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-num" data-target="8" data-suffix="+">0</span>
+        <span class="stat-label">Years of Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="2500" data-suffix="+">0</span>
+        <span class="stat-label">Cars Detailed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="99" data-suffix="%">0</span>
+        <span class="stat-label">Customer Satisfaction</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SERVICES ────────────────────────────────────────────────── -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">[ 01 — Services ]</span>
+        <h2 class="section-heading">What We<br>Offer</h2>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <span class="service-number">01</span>
+          <div class="service-name">Exterior Wash<br>& Dry</div>
+          <p class="service-desc">A thorough hand wash, rinse, and dry — no automated brushes. Clean and presentable from the outside in.</p>
+          <ul class="service-features">
+            <li>Full exterior hand wash</li>
+            <li>Streak-free hand dry</li>
+            <li>Tire and wheel cleaning</li>
+            <li>Tire dressing applied</li>
+            <li>Window exterior clean</li>
+          </ul>
+          <a href="#contact" class="service-link">
+            Book This Service
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+
+        <div class="service-card">
+          <span class="service-number">02</span>
+          <div class="service-name">Interior<br>Detail</div>
+          <p class="service-desc">Deep interior restoration — every surface cleaned, conditioned, and refreshed so it smells and feels brand new.</p>
+          <ul class="service-features">
+            <li>Deep vacuum (seats, floor, trunk)</li>
+            <li>Steam clean all surfaces</li>
+            <li>Leather conditioning</li>
+            <li>Odor elimination treatment</li>
+            <li>Dashboard and trim wipe-down</li>
+          </ul>
+          <a href="#contact" class="service-link">
+            Book This Service
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+
+        <div class="service-card">
+          <span class="service-number">03</span>
+          <div class="service-name">Full<br>Detail</div>
+          <p class="service-desc">Our complete package. Interior and exterior treated to their best possible condition, plus engine bay cleaning.</p>
+          <ul class="service-features">
+            <li>Everything in Exterior Wash & Dry</li>
+            <li>Everything in Interior Detail</li>
+            <li>Engine bay degreasing & clean</li>
+            <li>Door jambs and seals cleaned</li>
+            <li>Clay bar paint decontamination</li>
+          </ul>
+          <a href="#contact" class="service-link">
+            Book This Service
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+
+        <div class="service-card">
+          <span class="service-number">04</span>
+          <div class="service-name">Paint Correction<br>& Ceramic Coating</div>
+          <p class="service-desc">The pinnacle of detailing. Multi-stage paint correction removes swirls, scratches, and oxidation. Sealed with a professional ceramic coat.</p>
+          <ul class="service-features">
+            <li>Multi-stage machine polishing</li>
+            <li>Swirl mark and scratch removal</li>
+            <li>Professional-grade ceramic coat</li>
+            <li>5-year protection guarantee</li>
+            <li>Hydrophobic water-repellent finish</li>
+          </ul>
+          <a href="#contact" class="service-link">
+            Book This Service
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRICING ───────────────────────────────────────────────── -->
+  <section id="pricing" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 0">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:48px">
+        <span class="section-label">[ 02 — Pricing ]</span>
+        <h2 class="section-heading">Simple,<br>Transparent Pricing</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)">
+
+        <div style="background:var(--surface-2);padding:48px 40px;position:relative;transition:background 0.3s" onmouseenter="this.style.background='var(--surface-3)'" onmouseleave="this.style.background='var(--surface-2)'">
+          <span style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:0.6;display:block;margin-bottom:20px">01 — Sedan</span>
+          <div style="font-family:var(--font-head);font-size:72px;font-weight:900;line-height:1;color:var(--accent);letter-spacing:-0.02em;margin-bottom:8px">$135</div>
+          <div style="font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:24px">Sedan Cars</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:36px">
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Interior & exterior detail</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Vacuum & shampoo</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Seat & carpet cleaning</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Wax & polish</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Stain & odor removal</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline" style="display:block;text-align:center">Book Now</a>
+        </div>
+
+        <div style="background:var(--black);padding:48px 40px;position:relative;border-left:3px solid var(--accent);transition:background 0.3s" onmouseenter="this.style.background='var(--surface-3)'" onmouseleave="this.style.background='var(--black)'">
+          <span style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:0.6;display:block;margin-bottom:20px">02 — Most Popular</span>
+          <div style="font-family:var(--font-head);font-size:72px;font-weight:900;line-height:1;color:var(--accent);letter-spacing:-0.02em;margin-bottom:8px">$155</div>
+          <div style="font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:24px">Trucks & SUVs</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:36px">
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Interior & exterior detail</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Vacuum & shampoo</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Seat & carpet cleaning</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Wax & polish</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Stain & odor removal</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Pet hair removal (extra may apply)</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="display:block;text-align:center">Book Now</a>
+        </div>
+
+        <div style="background:var(--surface-2);padding:48px 40px;position:relative;transition:background 0.3s" onmouseenter="this.style.background='var(--surface-3)'" onmouseleave="this.style.background='var(--surface-2)'">
+          <span style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:0.6;display:block;margin-bottom:20px">03 — Heavy Duty</span>
+          <div style="font-family:var(--font-head);font-size:72px;font-weight:900;line-height:1;color:var(--accent);letter-spacing:-0.02em;margin-bottom:8px">$185</div>
+          <div style="font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:24px">Construction Vehicles</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:36px">
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Interior & exterior detail</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Heavy-duty vacuum & shampoo</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Deep stain & mud removal</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Odor elimination</li>
+            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Wax & exterior polish</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline" style="display:block;text-align:center">Book Now</a>
+        </div>
+
+      </div>
+      <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:20px;letter-spacing:0.05em">All prices in CAD. Pet hair removal may incur additional charges. Contact us for custom quotes.</p>
+    </div>
+  </section>
+
+  <!-- ─── WHY US ────────────────────────────────────────────────── -->
+  <section id="why">
+    <div class="container">
+      <div class="why-layout">
+        <div class="why-left">
+          <span class="section-label">[ 03 — Why Us ]</span>
+          <h2 class="section-heading">The David<br>Autoworks<br>Difference</h2>
+          <p class="why-tagline">
+            We turn dirty vehicles into showroom shine. From daily drivers to trucks and SUVs, every vehicle gets treated like it is our own.
+          </p>
+        </div>
+        <div class="why-right">
+
+          <div class="why-item">
+            <div class="why-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/>
+              </svg>
+            </div>
+            <div>
+              <div class="why-item-title">Professional Service</div>
+              <p class="why-item-desc">Every job is done right the first time. We use professional-grade products and techniques on every vehicle — no shortcuts, no cutting corners.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="why-item-title">Affordable Prices</div>
+              <p class="why-item-desc">Premium results do not have to cost a fortune. We keep our pricing fair and transparent so your car gets the care it deserves without breaking the bank.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 10l4 4 8-8"/>
+              </svg>
+            </div>
+            <div>
+              <div class="why-item-title">Satisfaction Guaranteed</div>
+              <p class="why-item-desc">We stand behind every detail. If you are not 100% satisfied with the results, we will make it right. Licensed, insured, and accountable.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GALLERY ───────────────────────────────────────────────── -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:48px">
+        <span class="section-label">[ 04 — Gallery ]</span>
+        <h2 class="section-heading">Our Work<br>Speaks for Itself</h2>
+      </div>
+    </div>
+    <div style="padding: 0 32px; max-width:1264px; margin:0 auto">
+      <div class="gallery-grid">
+        <div class="gallery-card" style="background:url('images/aftermust.jpg') center center/cover no-repeat">
+          <div class="gallery-shine"></div>
+          <div class="gallery-overlay"><span class="gallery-label">Mustang — After</span></div>
+        </div>
+        <div class="gallery-card" style="background:url('images/aftercad.jpg') center center/cover no-repeat">
+          <div class="gallery-shine"></div>
+          <div class="gallery-overlay"><span class="gallery-label">Escalade — After</span></div>
+        </div>
+        <div class="gallery-card" style="background:url('images/afterint.jpg') center top/cover no-repeat">
+          <div class="gallery-shine"></div>
+          <div class="gallery-overlay"><span class="gallery-label">Interior — After</span></div>
+        </div>
+        <div class="gallery-card" style="background:url('images/beforemust.jpg') center center/cover no-repeat">
+          <div class="gallery-shine"></div>
+          <div class="gallery-overlay"><span class="gallery-label">Mustang — Before</span></div>
+        </div>
+        <div class="gallery-card" style="background:url('images/beforecad.jpg') center center/cover no-repeat">
+          <div class="gallery-shine"></div>
+          <div class="gallery-overlay"><span class="gallery-label">Escalade — Before</span></div>
+        </div>
+        <div class="gallery-card" style="background:url('images/beforeint.jpg') center top/cover no-repeat">
+          <div class="gallery-shine"></div>
+          <div class="gallery-overlay"><span class="gallery-label">Interior — Before</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BEFORE / AFTER ─────────────────────────────────────────── -->
+  <section id="results">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:48px">
+        <span class="section-label">[ 05 — Results ]</span>
+        <h2 class="section-heading">Drag the Slider.<br>See the <span style="color:var(--accent)">Difference.</span></h2>
+      </div>
+
+      <div class="ba-grid">
+
+        <div class="ba-item">
+          <div class="ba-visual ba-slider">
+            <div class="ba-before" style="background:url('images/beforecad.jpg') center/cover no-repeat,#111">
+              <span class="ba-label">Before</span>
+            </div>
+            <div class="ba-after" style="background:url('images/aftercad.jpg') center/cover no-repeat,#111">
+              <div class="ba-gloss"></div>
+              <span class="ba-label">After</span>
+            </div>
+            <div class="ba-divider">
+              <div class="ba-handle">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 8H1M11 8h4M5 5L2 8l3 3M11 5l3 3-3 3" stroke="#000" stroke-width="1.5"/></svg>
+              </div>
+            </div>
+          </div>
+          <span class="ba-caption">Cadillac Escalade — Full Detail</span>
+        </div>
+
+        <div class="ba-item">
+          <div class="ba-visual ba-slider">
+            <div class="ba-before" style="background:url('images/beforemust.jpg') center/cover no-repeat,#111">
+              <span class="ba-label">Before</span>
+            </div>
+            <div class="ba-after" style="background:url('images/aftermust.jpg') center/cover no-repeat,#111">
+              <div class="ba-gloss"></div>
+              <span class="ba-label">After</span>
+            </div>
+            <div class="ba-divider">
+              <div class="ba-handle">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 8H1M11 8h4M5 5L2 8l3 3M11 5l3 3-3 3" stroke="#000" stroke-width="1.5"/></svg>
+              </div>
+            </div>
+          </div>
+          <span class="ba-caption">Ford Mustang — Exterior Detail</span>
+        </div>
+
+        <div class="ba-item">
+          <div class="ba-visual ba-slider">
+            <div class="ba-before" style="background:url('images/beforeint.jpg') center/cover no-repeat,#111">
+              <span class="ba-label">Before</span>
+            </div>
+            <div class="ba-after" style="background:url('images/afterint.jpg') center/cover no-repeat,#111">
+              <div class="ba-gloss"></div>
+              <span class="ba-label">After</span>
+            </div>
+            <div class="ba-divider">
+              <div class="ba-handle">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 8H1M11 8h4M5 5L2 8l3 3M11 5l3 3-3 3" stroke="#000" stroke-width="1.5"/></svg>
+              </div>
+            </div>
+          </div>
+          <span class="ba-caption">SUV Interior — Deep Clean</span>
+        </div>
+
+      </div>
+
+      <div class="ba-footer">
+        <p class="ba-body">From filthy to flawless — David Autoworks delivers showroom-quality results on every vehicle, every time.</p>
+        <a href="#contact" class="btn btn-primary">Book Your Detail</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ───────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-layout">
+
+        <div class="contact-info">
+          <span class="section-label">[ 06 — Contact ]</span>
+          <h2 class="section-heading">Book Your<br>Detail</h2>
+          <p class="contact-tagline">
+            Ready to give your vehicle the shine it deserves? Fill out the form or call us directly at <strong style="color:var(--white)">(825) 889-3306</strong> and we will get back to you to confirm your appointment.
+          </p>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 1h3l1.5 3.5-1.75 1.25C6.75 7.5 8.5 9.25 10.25 9.25L11.5 7.5 15 9v3c0 1-7 3-12-8z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-detail-label">Call Us</div>
+                <div class="contact-detail-value"><a href="tel:+18258893306" style="color:inherit;text-decoration:none">+1 (825) 889-3306</a></div>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="1" y="3" width="14" height="10" rx="0"/>
+                  <path d="M1 3l7 6 7-6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-detail-label">Email</div>
+                <div class="contact-detail-value">DM on Facebook or Instagram</div>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="8" cy="7" r="2.5"/><path d="M8 1C5.24 1 3 3.24 3 7c0 4 5 8 5 8s5-4 5-8c0-3.76-2.24-6-5-6z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-detail-label">Location</div>
+                <div class="contact-detail-value">Calgary, AB — location provided on booking</div>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 2"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-detail-label">Hours</div>
+                <div class="contact-detail-value">Mon – Sat: 8:00 AM – 6:00 PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="John Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+1 (XXX) XXX-XXXX" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="vehicle">Your Vehicle</label>
+            <input type="text" id="vehicle" name="vehicle" placeholder="e.g. 2021 BMW M3 Competition" required>
+          </div>
+          <div class="form-group">
+            <label for="service">Service Required</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option value="exterior">Exterior Wash & Dry</option>
+              <option value="interior">Interior Detail</option>
+              <option value="full">Full Detail</option>
+              <option value="ceramic">Paint Correction & Ceramic Coating</option>
+              <option value="other">Not sure — let's talk</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message (Optional)</label>
+            <textarea id="message" name="message" placeholder="Any specific concerns, damage, or areas of focus..."></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary">Send Booking Request</button>
+          </div>
+          <p id="formMsg" style="font-size:13px;color:var(--accent);display:none;margin-top:8px">
+            Message sent! We will be in touch within 24 hours.
+          </p>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo">David <span>Auto</span>works</a>
+          <p class="footer-tagline">Calgary's car detailing specialists. We turn dirty vehicles into showroom shine. Licensed &amp; insured.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/david.autoworks" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 006.31 7.84V10.3H4.4V8h1.91V6.3c0-1.88 1.12-2.92 2.83-2.92.82 0 1.68.15 1.68.15v1.84h-.95c-.93 0-1.22.58-1.22 1.17V8h2.08l-.33 2.3h-1.75v5.54A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/david_autoworks" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C5.83 0 5.55.01 4.7.05 3.85.09 3.27.22 2.76.42a3.9 3.9 0 00-1.41.92A3.9 3.9 0 00.42 2.76C.22 3.27.09 3.85.05 4.7.01 5.55 0 5.83 0 8s.01 2.45.05 3.3c.04.85.17 1.43.37 1.94.2.52.48.97.92 1.41.44.44.89.72 1.41.92.51.2 1.09.33 1.94.37.85.04 1.13.05 3.3.05s2.45-.01 3.3-.05c.85-.04 1.43-.17 1.94-.37a3.9 3.9 0 001.41-.92 3.9 3.9 0 00.92-1.41c.2-.51.33-1.09.37-1.94.04-.85.05-1.13.05-3.3s-.01-2.45-.05-3.3c-.04-.85-.17-1.43-.37-1.94a3.9 3.9 0 00-.92-1.41A3.9 3.9 0 0013.24.42C12.73.22 12.15.09 11.3.05 10.45.01 10.17 0 8 0zm0 1.44c2.14 0 2.39.01 3.23.05.78.04 1.2.16 1.48.27.37.14.64.32.92.6.28.28.46.55.6.92.11.28.23.7.27 1.48.04.84.05 1.09.05 3.23s-.01 2.39-.05 3.23c-.04.78-.16 1.2-.27 1.48a2.47 2.47 0 01-.6.92 2.47 2.47 0 01-.92.6c-.28.11-.7.23-1.48.27-.84.04-1.09.05-3.23.05s-2.39-.01-3.23-.05c-.78-.04-1.2-.16-1.48-.27a2.47 2.47 0 01-.92-.6 2.47 2.47 0 01-.6-.92c-.11-.28-.23-.7-.27-1.48C1.45 10.39 1.44 10.14 1.44 8s.01-2.39.05-3.23c.04-.78.16-1.2.27-1.48.14-.37.32-.64.6-.92.28-.28.55-.46.92-.6.28-.11.7-.23 1.48-.27.84-.04 1.09-.05 3.23-.05zM8 3.89a4.11 4.11 0 100 8.22 4.11 4.11 0 000-8.22zm0 6.78a2.67 2.67 0 110-5.34 2.67 2.67 0 010 5.34zM12.27 2.77a.96.96 0 100 1.92.96.96 0 000-1.92z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why">Why Us</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="#contact">Exterior Wash & Dry</a></li>
+            <li><a href="#contact">Interior Detail</a></li>
+            <li><a href="#contact">Full Detail</a></li>
+            <li><a href="#contact">Paint Correction</a></li>
+            <li><a href="#contact">Ceramic Coating</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2024 <span>David Autoworks</span>. All rights reserved.</p>
+        <p class="footer-copy">Calgary, AB &nbsp;·&nbsp; Licensed &amp; Insured &nbsp;·&nbsp; (825) 889-3306</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Sticky Nav ──────────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ─── Hamburger Menu ──────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.mob-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ─── Stat Counter ────────────────────────────────────────────
+    const counters = document.querySelectorAll('.stat-num[data-target]');
+    let counted = false;
+
+    function runCounters() {
+      counters.forEach(el => {
+        const target = +el.dataset.target;
+        const suffix = el.dataset.suffix || '';
+        const duration = 1800;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const tick = () => {
+          current = Math.min(current + step, target);
+          el.textContent = (target >= 100
+            ? Math.floor(current).toLocaleString()
+            : Math.floor(current)) + suffix;
+          if (current < target) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }
+
+    const statsObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !counted) {
+        counted = true;
+        runCounters();
+      }
+    }, { threshold: 0.3 });
+    statsObs.observe(document.getElementById('stats'));
+
+    // ─── Before / After Sliders (multi) ──────────────────────────
+    let activeSlider = null;
+
+    function setSlider(visual, pct) {
+      const clamped = Math.max(5, Math.min(95, pct));
+      const after   = visual.querySelector('.ba-after');
+      const divider = visual.querySelector('.ba-divider');
+      after.style.clipPath  = `inset(0 ${100 - clamped}% 0 0)`;
+      divider.style.left    = clamped + '%';
+    }
+
+    document.querySelectorAll('.ba-slider').forEach(visual => {
+      setSlider(visual, 50);
+
+      visual.addEventListener('mousedown', e => { activeSlider = visual; e.preventDefault(); });
+      visual.addEventListener('touchstart', e => { activeSlider = visual; }, { passive: true });
+    });
+
+    window.addEventListener('mouseup',  () => { activeSlider = null; });
+    window.addEventListener('touchend', () => { activeSlider = null; });
+
+    window.addEventListener('mousemove', e => {
+      if (!activeSlider) return;
+      const rect = activeSlider.getBoundingClientRect();
+      setSlider(activeSlider, ((e.clientX - rect.left) / rect.width) * 100);
+    });
+
+    window.addEventListener('touchmove', e => {
+      if (!activeSlider) return;
+      const rect = activeSlider.getBoundingClientRect();
+      setSlider(activeSlider, ((e.touches[0].clientX - rect.left) / rect.width) * 100);
+    }, { passive: true });
+
+    // ─── Contact Form Intercept ───────────────────────────────────
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const msg = document.getElementById('formMsg');
+      msg.style.display = 'block';
+      e.target.reset();
+      setTimeout(() => { msg.style.display = 'none'; }, 5000);
+    });
+  </script>
+
+</body>
+</html>
