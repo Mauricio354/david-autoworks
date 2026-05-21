@@ -25,7 +25,7 @@
       --font-body:  'Space Grotesk', sans-serif;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       background: var(--black);
@@ -302,6 +302,8 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
+      z-index: 2;
+      pointer-events: none;
     }
 
     .hero-scroll span {
@@ -603,6 +605,28 @@
     }
     .gallery-card:hover .gallery-shine { transform: translateX(100%); }
 
+    /* ─── PRICING GRID ──────────────────────────────────────────── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .pricing-card {
+      background: var(--surface-2);
+      padding: 48px 40px;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .pricing-card:hover { background: var(--surface-3); }
+    .pricing-card.featured {
+      background: var(--black);
+      border-left: 3px solid var(--accent);
+    }
+    .pricing-card.featured:hover { background: var(--surface-3); }
+
     /* ─── BEFORE/AFTER ────────────────────────────────────────── */
     #results {
       background: var(--surface);
@@ -640,6 +664,7 @@
       overflow: hidden;
       user-select: none;
       cursor: ew-resize;
+      touch-action: none;
     }
 
     .ba-before, .ba-after {
@@ -653,6 +678,7 @@
       z-index: 2;
       clip-path: inset(0 50% 0 0);
       transition: clip-path 0.01s;
+      will-change: clip-path;
     }
 
     .ba-gloss {
@@ -1002,8 +1028,12 @@
         grid-template-rows: repeat(3, 260px);
       }
 
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card, .pricing-card.featured { border-left: none; border-top: 3px solid transparent; }
+      .pricing-card.featured { border-top-color: var(--accent); }
+
       .ba-grid { grid-template-columns: 1fr; }
-      .ba-visual { height: 280px; }
+      .ba-visual { height: 260px; }
 
       .contact-layout {
         grid-template-columns: 1fr;
@@ -1027,6 +1057,7 @@
 
     @media (max-width: 600px) {
       .hero-headline { font-size: 56px; }
+      .hero-scroll { display: none; }
       .stats-inner { grid-template-columns: 1fr; }
       .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
       .stat-item:last-child { border-bottom: none; }
@@ -1210,47 +1241,47 @@
         <span class="section-label">[ 02 — Pricing ]</span>
         <h2 class="section-heading">Simple,<br>Transparent Pricing</h2>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)">
+      <div class="pricing-grid">
 
-        <div style="background:var(--surface-2);padding:48px 40px;position:relative;transition:background 0.3s" onmouseenter="this.style.background='var(--surface-3)'" onmouseleave="this.style.background='var(--surface-2)'">
-          <span style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:0.6;display:block;margin-bottom:20px">01 — Sedan</span>
-          <div style="font-family:var(--font-head);font-size:72px;font-weight:900;line-height:1;color:var(--accent);letter-spacing:-0.02em;margin-bottom:8px">$135</div>
-          <div style="font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:24px">Sedan Cars</div>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:36px">
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Interior & exterior detail</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Vacuum & shampoo</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Seat & carpet cleaning</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Wax & polish</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Stain & odor removal</li>
+        <div class="pricing-card">
+          <span class="section-label">01 — Sedan</span>
+          <div class="stat-num" style="font-size:clamp(48px,8vw,72px);margin-bottom:8px">$135</div>
+          <div class="service-name" style="font-size:22px;margin-bottom:24px">Sedan Cars</div>
+          <ul class="service-features" style="margin-bottom:36px">
+            <li>Interior &amp; exterior detail</li>
+            <li>Vacuum &amp; shampoo</li>
+            <li>Seat &amp; carpet cleaning</li>
+            <li>Wax &amp; polish</li>
+            <li>Stain &amp; odor removal</li>
           </ul>
           <a href="#contact" class="btn btn-outline" style="display:block;text-align:center">Book Now</a>
         </div>
 
-        <div style="background:var(--black);padding:48px 40px;position:relative;border-left:3px solid var(--accent);transition:background 0.3s" onmouseenter="this.style.background='var(--surface-3)'" onmouseleave="this.style.background='var(--black)'">
-          <span style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:0.6;display:block;margin-bottom:20px">02 — Most Popular</span>
-          <div style="font-family:var(--font-head);font-size:72px;font-weight:900;line-height:1;color:var(--accent);letter-spacing:-0.02em;margin-bottom:8px">$155</div>
-          <div style="font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:24px">Trucks & SUVs</div>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:36px">
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Interior & exterior detail</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Vacuum & shampoo</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Seat & carpet cleaning</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Wax & polish</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Stain & odor removal</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Pet hair removal (extra may apply)</li>
+        <div class="pricing-card featured">
+          <span class="section-label">02 — Most Popular</span>
+          <div class="stat-num" style="font-size:clamp(48px,8vw,72px);margin-bottom:8px">$155</div>
+          <div class="service-name" style="font-size:22px;margin-bottom:24px">Trucks &amp; SUVs</div>
+          <ul class="service-features" style="margin-bottom:36px">
+            <li>Interior &amp; exterior detail</li>
+            <li>Vacuum &amp; shampoo</li>
+            <li>Seat &amp; carpet cleaning</li>
+            <li>Wax &amp; polish</li>
+            <li>Stain &amp; odor removal</li>
+            <li>Pet hair removal (extra may apply)</li>
           </ul>
           <a href="#contact" class="btn btn-primary" style="display:block;text-align:center">Book Now</a>
         </div>
 
-        <div style="background:var(--surface-2);padding:48px 40px;position:relative;transition:background 0.3s" onmouseenter="this.style.background='var(--surface-3)'" onmouseleave="this.style.background='var(--surface-2)'">
-          <span style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);opacity:0.6;display:block;margin-bottom:20px">03 — Heavy Duty</span>
-          <div style="font-family:var(--font-head);font-size:72px;font-weight:900;line-height:1;color:var(--accent);letter-spacing:-0.02em;margin-bottom:8px">$185</div>
-          <div style="font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:24px">Construction Vehicles</div>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:36px">
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Interior & exterior detail</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Heavy-duty vacuum & shampoo</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Deep stain & mud removal</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Odor elimination</li>
-            <li style="font-size:13px;color:var(--gray-light);display:flex;align-items:center;gap:12px"><span style="display:block;width:16px;height:1px;background:var(--accent);flex-shrink:0"></span>Wax & exterior polish</li>
+        <div class="pricing-card">
+          <span class="section-label">03 — Heavy Duty</span>
+          <div class="stat-num" style="font-size:clamp(48px,8vw,72px);margin-bottom:8px">$185</div>
+          <div class="service-name" style="font-size:22px;margin-bottom:24px">Construction Vehicles</div>
+          <ul class="service-features" style="margin-bottom:36px">
+            <li>Interior &amp; exterior detail</li>
+            <li>Heavy-duty vacuum &amp; shampoo</li>
+            <li>Deep stain &amp; mud removal</li>
+            <li>Odor elimination</li>
+            <li>Wax &amp; exterior polish</li>
           </ul>
           <a href="#contact" class="btn btn-outline" style="display:block;text-align:center">Book Now</a>
         </div>
@@ -1660,9 +1691,10 @@
 
     window.addEventListener('touchmove', e => {
       if (!activeSlider) return;
+      e.preventDefault();
       const rect = activeSlider.getBoundingClientRect();
       setSlider(activeSlider, ((e.touches[0].clientX - rect.left) / rect.width) * 100);
-    }, { passive: true });
+    }, { passive: false });
 
     // ─── Contact Form Intercept ───────────────────────────────────
     document.getElementById('contactForm').addEventListener('submit', e => {
