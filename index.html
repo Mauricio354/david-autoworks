@@ -677,7 +677,6 @@
     .ba-after {
       z-index: 2;
       clip-path: inset(0 50% 0 0);
-      transition: clip-path 0.01s;
       will-change: clip-path;
     }
 
@@ -1664,20 +1663,45 @@
 
     // ─── Before / After Sliders (multi) ──────────────────────────
     let activeSlider = null;
+    const sliderData = new Map();
 
-    function setSlider(visual, pct) {
+    function setSlider(data, pct) {
       const clamped = Math.max(5, Math.min(95, pct));
-      const after   = visual.querySelector('.ba-after');
-      const divider = visual.querySelector('.ba-divider');
-      after.style.clipPath  = `inset(0 ${100 - clamped}% 0 0)`;
-      divider.style.left    = clamped + '%';
+      data.after.style.clipPath = `inset(0 ${100 - clamped}% 0 0)`;
+      data.divider.style.left   = clamped + '%';
     }
 
     document.querySelectorAll('.ba-slider').forEach(visual => {
-      setSlider(visual, 50);
+      const data = {
+        after:   visual.querySelector('.ba-after'),
+        divider: visual.querySelector('.ba-divider'),
+        rect:    null,
+        ticking: false
+      };
+      sliderData.set(visual, data);
+      setSlider(data, 50);
 
-      visual.addEventListener('mousedown', e => { activeSlider = visual; e.preventDefault(); });
-      visual.addEventListener('touchstart', e => { activeSlider = visual; }, { passive: true });
+      visual.addEventListener('mousedown', e => {
+        activeSlider = visual;
+        data.rect = visual.getBoundingClientRect();
+        e.preventDefault();
+      });
+
+      visual.addEventListener('touchstart', e => {
+        activeSlider = visual;
+        data.rect = visual.getBoundingClientRect();
+      }, { passive: true });
+
+      // Scoped to each slider element — no passive:false on window needed
+      visual.addEventListener('touchmove', e => {
+        if (activeSlider !== visual || !data.rect || data.ticking) return;
+        const pct = ((e.touches[0].clientX - data.rect.left) / data.rect.width) * 100;
+        data.ticking = true;
+        requestAnimationFrame(() => {
+          setSlider(data, pct);
+          data.ticking = false;
+        });
+      }, { passive: true });
     });
 
     window.addEventListener('mouseup',  () => { activeSlider = null; });
@@ -1685,16 +1709,15 @@
 
     window.addEventListener('mousemove', e => {
       if (!activeSlider) return;
-      const rect = activeSlider.getBoundingClientRect();
-      setSlider(activeSlider, ((e.clientX - rect.left) / rect.width) * 100);
+      const data = sliderData.get(activeSlider);
+      if (!data || !data.rect || data.ticking) return;
+      const pct = ((e.clientX - data.rect.left) / data.rect.width) * 100;
+      data.ticking = true;
+      requestAnimationFrame(() => {
+        setSlider(data, pct);
+        data.ticking = false;
+      });
     });
-
-    window.addEventListener('touchmove', e => {
-      if (!activeSlider) return;
-      e.preventDefault();
-      const rect = activeSlider.getBoundingClientRect();
-      setSlider(activeSlider, ((e.touches[0].clientX - rect.left) / rect.width) * 100);
-    }, { passive: false });
 
     // ─── Contact Form Intercept ───────────────────────────────────
     document.getElementById('contactForm').addEventListener('submit', e => {
